@@ -62,7 +62,7 @@ def main():
     global proxies
     proxies={
         "http":proxyMeta,
-        "https":proxyMeta
+        "http":proxyMeta
     }
     f = open("小号.txt")
 
@@ -86,16 +86,29 @@ def main():
         txtname="key.txt"
         key=keyname.getkey(txtname)
         # print(key)
-        targetUr1 = "https://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
+        targetUr1 = "http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
         print(targetUr1)
-        requ=requests.get(targetUr1,headers=head,proxies=proxies,cookies = cookie_jar,stream=True)
-        print(requ.status_code)
-        html = requ.content.decode()
-        HTML = etree.HTML(html)
-        # # print(html)
-        user = HTML.xpath("//a[@class='username']/text()")
-        print("当前用户是%s"%user)
+        try:
 
+            requ=requests.get(targetUr1,headers=head,proxies=proxies,cookies = cookie_jar,stream=True)
+            print(requ.status_code)
+            html = requ.content.decode()
+            HTML = etree.HTML(html)
+            # # print(html)
+            user = HTML.xpath("//a[@class='username']/text()")
+            print("当前用户是%s"%user)
+
+            time.sleep(8)
+        except:
+            requ = requests.get(targetUr1, headers=head, proxies=proxies, cookies=cookie_jar, stream=True)
+            print(requ.status_code)
+            html = requ.content.decode()
+            HTML = etree.HTML(html)
+            # # print(html)
+            user = HTML.xpath("//a[@class='username']/text()")
+            print("当前用户是%s" % user)
+
+            time.sleep(8)
 
 
 
@@ -110,32 +123,50 @@ def main():
             print("结束时的ip%s"%ip2,end="")
             if ip1!=ip2:
                 print("ip已经更新")
-                time.sleep(8)
+
                 break
             else:
                 print("继续等待ip更新！！！！再次执行访问关键词和访问页面操作")
                 #
-                time.sleep(8)
-                txtname = ["gjc.txt","key.txt"]
-                import random
-                number = random.randint(0, 1)
-                key = keyname.getkey(txtname[number])
-                targetUr1 = "https://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
-                print(targetUr1)
-                requ = requests.get(targetUr1,headers=head,proxies=proxies, cookies=cookie_jar,stream=True)
-                print(requ.status_code)
-                html = requ.content.decode()
-                HTML = etree.HTML(html)
-                user = HTML.xpath("//a[@class='username']/text()")
-                print("当前用户是%s" % user)
+                try:
+                    time.sleep(8)
+                    txtname = ["gjc.txt", "key.txt"]
+                    import random
+                    number = random.randint(0, 1)
+                    key = keyname.getkey(txtname[number])
+                    targetUr1 = "http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
+                    print(targetUr1)
+                    requ = requests.get(targetUr1, headers=head, proxies=proxies, cookies=cookie_jar, stream=True)
 
+                    print(requ.status_code)
+                    html = requ.content.decode()
+                    HTML = etree.HTML(html)
+                    user = HTML.xpath("//a[@class='username']/text()")
+                    print("当前用户是%s" % user)
 
-                time.sleep(8)
+                    time.sleep(8)
+                except:
+                    time.sleep(8)
+                    txtname = ["gjc.txt", "key.txt"]
+                    import random
+                    number = random.randint(0, 1)
+                    key = keyname.getkey(txtname[number])
+                    targetUr1 = "http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
+                    print(targetUr1)
+                    requ = requests.get(targetUr1, headers=head, proxies=proxies, cookies=cookie_jar, stream=True)
+
+                    print(requ.status_code)
+                    html = requ.content.decode()
+                    HTML = etree.HTML(html)
+                    user = HTML.xpath("//a[@class='username']/text()")
+                    print("当前用户是%s" % user)
+
+                    time.sleep(8)
                 #
                 # ""
                 #
                 # "%e5%95%86%e6%a0%87%e6%b3%a8%e5%86%8c"
-                # "https://www.baidu.com/baidu?wd=%e5%95%86%e6%a0%87%e6%b3%a8%e5%86%8c&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153"
+                # "http://www.baidu.com/baidu?wd=%e5%95%86%e6%a0%87%e6%b3%a8%e5%86%8c&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153"
 
 
 

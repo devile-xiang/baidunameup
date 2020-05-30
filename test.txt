@@ -5,3 +5,21 @@ git clone github,ku URL
 git add .
 git commit -m "提交信息"
 git push -u origin master
+
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.baidu.com', port=443): Max retries exceeded with
+url: /baidu?wd=%E7%94%B5%E5%95%86%E7%BB%B4%E6%9D%83&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153
+ (Caused by ProxyError('Cannot connect to proxy.', OSError(0, 'Error')))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
