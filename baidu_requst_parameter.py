@@ -11,7 +11,11 @@ import random
 def main():
 
     #访问链接
-    header={
+    # requests.adapters.DEFAULT_RETRIES = 15
+    # # 设置连接活跃状态为False
+    # s = requests.session()
+    # s.keep_alive = False
+    head={
         "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "Accept-Encoding":"gzip, deflate",
         "Accept-Language":"zh-CN,zh;q=0.9",
@@ -22,7 +26,7 @@ def main():
         "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
 
     }
-    f = open("小号.txt")
+
 
     # targetUrl="http://httpbin.org/get"
     targetUrl = "http://test.abuyun.com/"
@@ -60,25 +64,31 @@ def main():
         "http":proxyMeta,
         "https":proxyMeta
     }
+    f = open("小号.txt")
 
     for i in f:
-        requ = requests.get(targetUrl,proxies=proxies,stream=True)
+        line = f.readline()
+        # print("当前使用的cookie%s" % line)
+        cookie_jar = RequestsCookieJar()
+
+
+        requ = requests.get(targetUrl,headers=head,cookies=cookie_jar,proxies=proxies,stream=True)
         html = requ.content
         HTML = etree.HTML(html)
         ip1 = HTML.xpath("//tr[3]/td/text()")
         print("当前使用的ip%s"%ip1)
 
-        line = f.readline()
-        cookie_jar=RequestsCookieJar()
 
-        cookie_jar.set("BDUSS", '%s' % line[6:-2],domain=".baidu.com")
 
-        txtname="gjc.txt"
+        # cookie_jar.set("BDUSS", '%s' % line[6:-2],domain=".baidu.com")
+        cookie_jar.set("BDUSS", '%s' % line[6:-2], domain=".baidu.com")
+
+        txtname="key.txt"
         key=keyname.getkey(txtname)
         # print(key)
         targetUr1 = "https://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
         print(targetUr1)
-        requ=requests.get(targetUr1,proxies=proxies,cookies = cookie_jar,stream=True)
+        requ=requests.get(targetUr1,headers=head,proxies=proxies,cookies = cookie_jar,stream=True)
         print(requ.status_code)
         html = requ.content.decode()
         HTML = etree.HTML(html)
@@ -92,7 +102,7 @@ def main():
 
         while True:
 
-            requ = requests.get(targetUrl, proxies=proxies,stream=True)
+            requ = requests.get(targetUrl,headers=head,cookies=cookie_jar,proxies=proxies,stream=True)
             html = requ.content
             HTML = etree.HTML(html)
             ip2 = HTML.xpath("//tr[3]/td/text()")
@@ -100,24 +110,27 @@ def main():
             print("结束时的ip%s"%ip2,end="")
             if ip1!=ip2:
                 print("ip已经更新")
-                time.sleep(30)
+                time.sleep(8)
                 break
             else:
                 print("继续等待ip更新！！！！再次执行访问关键词和访问页面操作")
                 #
-                time.sleep(30)
-                txtname = "gjc.txt"
-                key = keyname.getkey(txtname)
+                time.sleep(8)
+                txtname = ["gjc.txt","key.txt"]
+                import random
+                number = random.randint(0, 1)
+                key = keyname.getkey(txtname[number])
                 targetUr1 = "https://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
                 print(targetUr1)
-                requ = requests.get(targetUr1, proxies=proxies, cookies=cookie_jar,stream=True)
+                requ = requests.get(targetUr1,headers=head,proxies=proxies, cookies=cookie_jar,stream=True)
                 print(requ.status_code)
                 html = requ.content.decode()
                 HTML = etree.HTML(html)
                 user = HTML.xpath("//a[@class='username']/text()")
                 print("当前用户是%s" % user)
 
-                time.sleep(30)
+
+                time.sleep(8)
                 #
                 # ""
                 #

@@ -1,7 +1,7 @@
 #encoding:utf-8
 
 import time
-import keyname
+from baidunameup import keyname
 import requests
 from lxml import etree
 
@@ -88,8 +88,10 @@ def main():
 
         # print(cookie_jar)
         # , cookies = cookie_jar
-        key=keyname.getkey()
-        # print(key)
+        txtname = ["gjc.txt", "key.txt"]
+        import random
+        number = random.randint(0, 1)
+        key = keyname.getkey(txtname[number])
         targetUr1="http://www.baidu.com/s?wd=%s"%key
         print(targetUr1)
         requ=requests.get(targetUr1,proxies=proxies,cookies = cookie_jar,stream=True)
@@ -130,7 +132,10 @@ def main():
                 print("继续等待ip更新！！！！再次执行访问关键词和访问页面操作")
                 #
                 time.sleep(8)
-                key = keyname.getkey()
+                txtname = ["gjc.txt", "key.txt"]
+                import random
+                number = random.randint(0, 1)
+                key = keyname.getkey(txtname[number])
                 # print(key)
                 targetUr1 = "http://www.baidu.com/s?wd=%s" % key
                 print(targetUr1)
