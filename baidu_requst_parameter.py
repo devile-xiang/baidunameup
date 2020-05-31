@@ -23,7 +23,8 @@ def main():
 
         "Upgrade-Insecure-Requests":"1",
         # "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
-        "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
+        "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36",
+        "Proxy-Switch-Ip": "yes"
 
     }
 
@@ -88,27 +89,17 @@ def main():
         # print(key)
         targetUr1 = "http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
         print(targetUr1)
-        try:
 
-            requ=requests.get(targetUr1,headers=head,proxies=proxies,cookies = cookie_jar,stream=True)
-            print(requ.status_code)
-            html = requ.content.decode()
-            HTML = etree.HTML(html)
-            # # print(html)
-            user = HTML.xpath("//a[@class='username']/text()")
-            print("当前用户是%s"%user)
 
-            time.sleep(8)
-        except:
-            requ = requests.get(targetUr1, headers=head, proxies=proxies, cookies=cookie_jar, stream=True)
-            print(requ.status_code)
-            html = requ.content.decode()
-            HTML = etree.HTML(html)
-            # # print(html)
-            user = HTML.xpath("//a[@class='username']/text()")
-            print("当前用户是%s" % user)
+        requ=requests.get(targetUr1,headers=head,proxies=proxies,cookies = cookie_jar,stream=True)
+        print(requ.status_code)
+        html = requ.content.decode()
+        HTML = etree.HTML(html)
+        # # print(html)
+        user = HTML.xpath("//a[@class='username']/text()")
+        print("当前用户是%s"%user)
+        time.sleep(0.25)
 
-            time.sleep(8)
 
 
 
