@@ -88,7 +88,7 @@ def main():
 
         # print(cookie_jar)
         # , cookies = cookie_jar
-        txtname = ["gjc.txt", "key.txt"]
+        txtname = ["gjc.textkey.txt", "key.textkey.txt"]
         import random
         number = random.randint(0, 1)
         key = keyname.getkey(txtname[number])
@@ -132,7 +132,7 @@ def main():
                 print("继续等待ip更新！！！！再次执行访问关键词和访问页面操作")
                 #
                 time.sleep(8)
-                txtname = ["gjc.txt", "key.txt"]
+                txtname = ["gjc.textkey.txt", "key.textkey.txt"]
                 import random
                 number = random.randint(0, 1)
                 key = keyname.getkey(txtname[number])

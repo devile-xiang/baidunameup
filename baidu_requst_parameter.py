@@ -66,6 +66,58 @@ def main():
         "http":proxyMeta
     }
     f = open("小号.txt")
+    openurl=[]
+    ct=["2097153","2097152","2097153"]
+    #小说
+    txtwebsite=[
+        'www.15huang.com',
+        "www.guiayi.com",
+        "www.shjiangting.com",
+        "www.167k.com" ,
+        "www.sharjah.cc",
+        "www.92kshu.com",
+        "www.92kshu.cc",
+        "www.kuaikanxs.cc",
+        "www.zazhimall.com",
+        "www.jdhs.cc",]
+    #机械
+    Mechanicswebsite=[
+        "www.chinahuaji.com",
+        "www.epoji.net",
+        "www.suikuangji.com",
+        "www.51xishaji.com",
+        "www.meiqiuji.net",
+        "www.bashihejinwang.com",
+        "www.cngaoge.cn",
+        "www.oupukeji.com",
+        "www.taifuximadianji.com",
+        "www.cnjly.com",
+        "www.szbaoheng.cn",
+    ]
+    #工艺品
+    technologywebsite=[
+        "www.tcjpjt.net",
+        "www.songtaogongyi.com",
+        "www.jiawc.com",
+        "guangxi.zhaobiao.cn",
+        "www.duizhuang.com",
+        "www.zgszys.com",
+        "www.szhad.net ",
+        "www.meishu163.com",
+        "www.lvsongshi.org",
+        "www.cmcat.com",
+
+    ]
+
+
+    getURL=[]
+
+    for i in txtwebsite:
+
+        url="http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153"
+
+
+
 
     for i in f:
         line = f.readline()
@@ -84,7 +136,7 @@ def main():
         # cookie_jar.set("BDUSS", '%s' % line[6:-2],domain=".baidu.com")
         cookie_jar.set("BDUSS", '%s' % line[6:-2], domain=".baidu.com")
 
-        txtname="key.txt"
+        txtname="key.textkey.txt"
         key=keyname.getkey(txtname)
         # print(key)
         targetUr1 = "http://www.baidu.com/baidu?wd=%s&tn=monline_4_dg&ie=utf-8&si=www.baochengshangbiao.com&ct=2097153" % key
@@ -121,7 +173,7 @@ def main():
                 #
                 try:
                     time.sleep(8)
-                    txtname = ["gjc.txt", "key.txt"]
+                    txtname = ["gjc.textkey.txt", "key.textkey.txt"]
                     import random
                     number = random.randint(0, 1)
                     key = keyname.getkey(txtname[number])
@@ -138,7 +190,7 @@ def main():
                     time.sleep(8)
                 except:
                     time.sleep(8)
-                    txtname = ["gjc.txt", "key.txt"]
+                    txtname = ["gjc.textkey.txt", "key.textkey.txt"]
                     import random
                     number = random.randint(0, 1)
                     key = keyname.getkey(txtname[number])
